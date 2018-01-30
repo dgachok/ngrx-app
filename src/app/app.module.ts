@@ -1,20 +1,28 @@
+//modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-
-import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers } from './reducers';
 
+// components
+import { AppComponent } from './app.component';
+import { FilmsAppComponent } from './components/films-app/films-app.component';
+import { FilmsListComponent } from './components/films-list/films-list.component';
+import { FilmsDetailsComponent } from './components/films-details/films-details.component';
+import { CommentsListComponent } from './components/comments-list/comments-list.component';
+
+// reducers
+import { reducers } from './reducers/film-reducers';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilmsAppComponent,
+    FilmsListComponent,
+    FilmsDetailsComponent,
+    CommentsListComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     StoreModule.forRoot(reducers)
   ],
   providers: [],

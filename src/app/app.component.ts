@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Store, select} from '@ngrx/store';
-import {State} from './reducers';
-import * as SearchActions from './actions/search-actions';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import * as fromRoot from './reducers';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +8,13 @@ import * as fromRoot from './reducers';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title$: Observable<string>;
+  $films: Observable<any>;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<any>) {
+    this.$films = store.select('films');
   }
 
   ngOnInit() {
-    this.title$ = this.store.pipe(select(fromRoot.selectFeatureTitle));
-    setTimeout(() => this.changeTitle('React'), 2000);
-  }
 
-  changeTitle(value: string) {
-    this.store.dispatch(new SearchActions.Title(value));
   }
-
 }
