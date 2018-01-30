@@ -1,4 +1,4 @@
-import * as SearchActions from '../actions/search-actions';
+import {SearchActionTypes, SearchActions} from '../actions/search-actions';
 
 export interface State {
   searchItems: string;
@@ -10,19 +10,13 @@ const initialState: State = {
   title: 'Angular'
 };
 
-export function reducer(state = initialState, action: SearchActions.Actions): State {
+export function reducer(state = initialState, action: SearchActions): State {
   switch (action.type) {
-    case SearchActions.SEARCH: {
-      return {
-        ...state,
-        searchItems: action.payload
-      }
-    }
-    case SearchActions.TITLE: {
+    case SearchActionTypes.TITLE: {
       return {
         ...state,
         title: action.payload
-      }
+      };
     }
 
     default: {

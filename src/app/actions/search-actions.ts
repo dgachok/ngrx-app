@@ -1,19 +1,22 @@
-import {Action} from "@ngrx/store";
-export const SEARCH = '[Books] Search';
-export const TITLE = '[Books] Title';
+import {Action} from '@ngrx/store';
+
+export enum SearchActionTypes {
+  SEARCH = '[Books] Search',
+  TITLE = '[Books] Title'
+}
 
 export class Search implements Action {
-  readonly type = SEARCH;
+  readonly type = SearchActionTypes.SEARCH;
 
   constructor(public payload: string) {}
 }
 
 export class Title implements Action {
-  readonly type = TITLE;
+  readonly type = SearchActionTypes.TITLE;
 
   constructor(public payload: string) {}
 }
 
-export type Actions
+export type SearchActions
   = Search
   | Title;
