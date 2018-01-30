@@ -1,0 +1,10 @@
+<ul class="nav nav-pills flex-column p-md-2">
+  <li *ngFor="let film of $films | async"
+      (click)="chooseFilm(film)"
+      class="nav-item">
+    <a class="nav-link page-link mt-md-1" [class.active]="film?.id === selected?.id | async">
+      {{film?.title}}
+      <span class="float-right">( {{film?.comments.length || 0}} )</span>
+    </a>
+  </li>
+</ul>

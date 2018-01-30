@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +6,7 @@ import {Observable} from 'rxjs/Observable';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  $films: Observable<any>;
-
-  constructor(private store: Store<any>) {
-    this.$films = store.select('films');
+  constructor() {
   }
 
   ngOnInit() {

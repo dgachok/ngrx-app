@@ -1,0 +1,20 @@
+<img class="img-fluid film-image" [src]="selected?.image" alt="background">
+<table class="table mt-md-2">
+  <tbody>
+  <tr>
+    <th width="40%" scope="row">Film name</th>
+    <td width="60%">{{selected?.title}}</td>
+  </tr>
+  <tr>
+    <th width="40%" scope="row">Film director</th>
+    <td width="60%">{{selected?.director}}</td>
+  </tr>
+  <tr>
+    <th width="40%" scope="row">Film description</th>
+    <td width="60%">{{selected?.description}}</td>
+  </tr>
+  </tbody>
+</table>
+<span>Comments ( {{selected?.comments?.length || 0}} )</span>
+<hr />
+<app-comments-list></app-comments-list>
