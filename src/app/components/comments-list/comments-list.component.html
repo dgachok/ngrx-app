@@ -3,7 +3,8 @@
     <p class="card-text">
       {{selectComment?.comment}}
     </p>
-    <a (click)="removeComment(selectComment)">Remove</a>
+    <div class="remove-link"
+       (click)="removeComment(selectComment)">Remove</div>
   </div>
 </div>
 
