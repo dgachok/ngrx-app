@@ -22,7 +22,7 @@ export class CommentsListComponent implements OnInit {
 
   submitForm(e, form, filmId) {
     e.preventDefault();
-    this.store.dispatch(addComment(form.value, filmId));
+    this.store.dispatch(addComment({...form.value, filmId}));
     form.reset();
   }
 

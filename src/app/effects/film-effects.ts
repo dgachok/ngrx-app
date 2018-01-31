@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import {FilmService} from '../services/film.service';
 import {
   ADD_COMMENT_ACTION, LOAD_FILMS_ACTION, loadFilms, loadSuccessFilms,
-  REMOVE_COMMENT_ACTION, addCommentSuccess, removeCommentSuccess
+  REMOVE_COMMENT_ACTION
 } from '../actions/film-actions';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
@@ -21,13 +21,13 @@ export class FilmEffects {
   @Effect() addCommentFilms$: Observable<Action> = this.actions$
     .ofType(ADD_COMMENT_ACTION)
     .mergeMap((action: any) =>
-      this.filmService.addCommentFilms(action.payload).map(() => addCommentSuccess(action.payload))
+      this.filmService.addCommentFilms(action.payload).map(loadFilms)
     );
 
   @Effect() removeCommentFilms$: Observable<Action> = this.actions$
     .ofType(REMOVE_COMMENT_ACTION)
     .mergeMap((action: any) =>
-      this.filmService.removeCommentFilms(action.payload).map(() => removeCommentSuccess(action.payload))
+      this.filmService.removeCommentFilms(action.payload).map(loadFilms)
     );
 
   constructor(
