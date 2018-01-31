@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/observable/combineLatest';
+import {loadFilms, selectedFilm} from '../../reducers/film-reducers';
 
 @Component({
   selector: 'app-films-list',
@@ -18,8 +19,8 @@ export class FilmsListComponent implements OnInit, OnDestroy {
   selected;
 
   constructor(private store: Store<any>) {
-    this.$films = store.select('films');
-    this.$selected = store.select('selected');
+    this.$films = store.select(loadFilms);
+    this.$selected = store.select(selectedFilm);
   }
 
   ngOnInit() {
@@ -28,20 +29,16 @@ export class FilmsListComponent implements OnInit, OnDestroy {
       this.$selected
     ).subscribe(([films, selected]) => {
         this.films = films;
-        if (this.isEmpty(selected)) {
-          this.chooseFilm(this.films[0]);
-        } else {
+        if (selected) {
           this.selected = selected;
+        } else {
+          this.chooseFilm(this.films[0]);
         }
     });
   }
 
   chooseFilm(film) {
-    this.store.dispatch(selectFilm(film));
-  }
-
-  isEmpty(obj) {
-    return Object.keys(obj).length === 0;
+    this.store.dispatch(selectFilm(film.id));
   }
 
   ngOnDestroy() {

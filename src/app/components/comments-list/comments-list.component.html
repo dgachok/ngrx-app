@@ -1,9 +1,9 @@
-<div class="card w-100">
+<div *ngFor="let selectComment of $selectComments | async" class="card w-100 mt-md-2">
   <div class="card-body">
     <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+      {{selectComment?.comment}}
     </p>
-    <a href="#" class="card-link">Remove</a>
+    <a (click)="removeComment(selectComment)">Remove</a>
   </div>
 </div>
 

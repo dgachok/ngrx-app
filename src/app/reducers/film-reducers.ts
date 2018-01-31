@@ -10,11 +10,11 @@ const filmsState = [
     comments: [
       {
         id: 1,
-        comment: ''
+        comment: 'test'
       },
       {
         id: 2,
-        comment: ''
+        comment: 'test'
       }
     ]
   },
@@ -27,11 +27,11 @@ const filmsState = [
     comments: [
       {
         id: 1,
-        comment: ''
+        comment: 'test'
       },
       {
         id: 2,
-        comment: ''
+        comment: 'test'
       }
     ]
   },
@@ -42,14 +42,14 @@ const films = (state = filmsState, action) => {
     case ADD_COMMENT_ACTION: {
       return [
         ...state,
-        action.payload
+        ...action.payload
       ];
     }
     case REMOVE_COMMENT_ACTION: {
       return [
         ...state,
-        action.payload
-      ]
+        ...action.payload
+      ];
     }
     default: {
       return state;
@@ -57,18 +57,22 @@ const films = (state = filmsState, action) => {
   }
 };
 
-const selected = (state = {}, action) => {
+const selected = (state, action) => {
   switch (action.type) {
     case SELECT_FILM_ACTION: {
-      return {
-        ...state,
-        ...action.payload
-      };
+      return action.payload;
     }
     default: {
       return state;
     }
   }
+};
+
+export const loadFilms = (state) => state.films;
+export const selectedFilm = (state) => state.films.filter(film => film.id === state.selected)[0];
+export const selectComments = (state) => {
+  const selectFilm = selectedFilm(state);
+  return selectFilm ? selectFilm.comments : [];
 };
 
 export const reducers = {films, selected};

@@ -2,9 +2,10 @@
   <li *ngFor="let film of $films | async"
       (click)="chooseFilm(film)"
       class="nav-item">
-    <a class="nav-link page-link mt-md-1" [class.active]="film?.id === selected?.id">
-      {{film?.title}}
-      <span class="float-right">( {{film?.comments.length || 0}} )</span>
+    <a class="nav-link page-link mt-md-1 d-flex justify-content-between"
+       [class.active]="film?.id === selected?.id">
+      <span>{{film?.title}}</span>
+      <span>( {{film?.comments.length || 0}} )</span>
     </a>
   </li>
 </ul>
