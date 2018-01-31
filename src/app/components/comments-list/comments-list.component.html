@@ -7,10 +7,10 @@
   </div>
 </div>
 
-<form class="mt-md-2 mb-md-4">
+<form #form="ngForm" (submit)="submitForm(form.value)" class="mt-md-2 mb-md-4">
   <div class="form-group">
-    <label for="exampleTextarea">Write comment</label>
-    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+    <label for="comment">Write comment</label>
+    <textarea class="form-control" name="comment"  id="comment" rows="3" ngModel></textarea>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

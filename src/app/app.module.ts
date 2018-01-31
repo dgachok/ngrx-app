@@ -11,6 +11,7 @@ import { CommentsListComponent } from './components/comments-list/comments-list.
 
 // reducers
 import { reducers } from './reducers/film-reducers';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { reducers } from './reducers/film-reducers';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

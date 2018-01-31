@@ -11,4 +11,8 @@ export class CommentsListComponent implements OnInit {
   ngOnInit() {
   }
 
+  submitForm(value) {
+    console.log('value', value);
+  }
+
 }
