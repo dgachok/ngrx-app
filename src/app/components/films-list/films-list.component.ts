@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import {Store} from "@ngrx/store";
-import {selectFilm} from "../../actions/film-actions";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {selectFilm} from '../../actions/film-actions';
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/observable/combineLatest';
 
 @Component({
   selector: 'app-films-list',
   templateUrl: './films-list.component.html'
 })
-export class FilmsListComponent implements OnInit {
+export class FilmsListComponent implements OnInit, OnDestroy {
   $films: Observable<any>;
   $selected: Observable<any>;
+  filmsListSubscription: Subscription;
   films = [];
   selected;
 
@@ -19,16 +23,15 @@ export class FilmsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.$films
-      .filter(films => films && films.length)
-      .switchMap((films) => {
+    this.filmsListSubscription = Observable.combineLatest(
+      this.$films.filter(films => films && films.length),
+      this.$selected
+    ).subscribe(([films, selected]) => {
         this.films = films;
-        return this.$selected;
-      }).subscribe(selected => {
-        if (selected) {
-          this.selected = selected;
+        if (this.isEmpty(selected)) {
+          this.chooseFilm(this.films[0]);
         } else {
-          this.selected = this.films[0];
+          this.selected = selected;
         }
     });
   }
@@ -37,4 +40,11 @@ export class FilmsListComponent implements OnInit {
     this.store.dispatch(selectFilm(film));
   }
 
+  isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  ngOnDestroy() {
+    this.filmsListSubscription.unsubscribe();
+  }
 }
