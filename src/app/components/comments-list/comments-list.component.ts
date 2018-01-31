@@ -18,8 +18,9 @@ export class CommentsListComponent implements OnInit {
   ngOnInit() {
   }
 
-  submitForm(value) {
-    this.store.dispatch(addComment(value.comment));
+  submitForm(e, value) {
+    e.preventDefault();
+    this.store.dispatch(addComment(value));
   }
 
   removeComment(comment) {

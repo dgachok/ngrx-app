@@ -37,6 +37,13 @@ const filmsState = [
   },
 ];
 
+export const loadFilms = (state) => state.films;
+export const selectedFilm = (state) => state.films.filter(film => film.id === state.selected)[0];
+export const selectComments = (state) => {
+  const selectFilm = selectedFilm(state);
+  return selectFilm ? selectFilm.comments : [];
+};
+
 const films = (state = filmsState, action) => {
   switch (action.type) {
     case ADD_COMMENT_ACTION: {
@@ -66,13 +73,6 @@ const selected = (state, action) => {
       return state;
     }
   }
-};
-
-export const loadFilms = (state) => state.films;
-export const selectedFilm = (state) => state.films.filter(film => film.id === state.selected)[0];
-export const selectComments = (state) => {
-  const selectFilm = selectedFilm(state);
-  return selectFilm ? selectFilm.comments : [];
 };
 
 export const reducers = {films, selected};
