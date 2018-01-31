@@ -15,6 +15,8 @@ import {FormsModule} from '@angular/forms';
 import {EffectsModule} from '@ngrx/effects';
 import {FilmEffects} from './effects/film-effects';
 import {FilmService} from './services/film.service';
+import {environment} from "../environments/environment";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,10 @@ import {FilmService} from './services/film.service';
     BrowserModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([FilmEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    }),
     FormsModule
   ],
   providers: [FilmService],

@@ -33,19 +33,14 @@ export class FilmService {
     return Observable.of(this.films);
   }
 
-  addCommentFilms(comment) {
-    const selectFilm = this.films.filter(film => film.id === comment.filmId)[0];
-    selectFilm.comments.push({id: this.commentId, comment: comment.comment});
-    this.commentId++;
+  addCommentFilms({comment, filmId}) {
     return Observable.of(null);
   }
   removeCommentFilms({commentId, filmId}) {
-    let index = 0;
-    const selectFilm = this.films.filter(film => film.id === filmId)[0];
-    selectFilm.comments.forEach((comment, i) => {
-      if (comment.id === commentId) { index = i; }
-    });
-    selectFilm.comments.splice(index, 1);
     return Observable.of(null);
+  }
+
+  selectFilmFromArray(filmId) {
+    return this.films.filter(film => film.id === filmId)[0];
   }
 }
