@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {loadFilms} from './actions/film-actions';
 
 @Component({
   selector: 'app-root',
@@ -6,10 +8,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor() {
+  constructor(private store: Store<any>) {
+    this.store.dispatch(loadFilms());
   }
 
   ngOnInit() {
-
   }
 }

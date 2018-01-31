@@ -1,14 +1,14 @@
-<div *ngFor="let selectComment of $selectComments | async" class="card w-100 mt-md-2">
+<div *ngFor="let selectComment of selectedFilm?.comments" class="card w-100 mt-md-2">
   <div class="card-body">
     <p class="card-text">
       {{selectComment?.comment}}
     </p>
     <div class="remove-link"
-       (click)="removeComment(selectComment)">Remove</div>
+       (click)="removeComment(selectComment?.id, selectedFilm.id)">Remove</div>
   </div>
 </div>
 
-<form #form="ngForm" (submit)="submitForm($event, form.value)" class="mt-md-2 mb-md-4">
+<form #form="ngForm" (submit)="submitForm($event, form, selectedFilm?.id)" class="mt-md-2 mb-md-4">
   <div class="form-group">
     <label for="comment">Write comment</label>
     <textarea class="form-control" name="comment"  id="comment" rows="3" ngModel></textarea>

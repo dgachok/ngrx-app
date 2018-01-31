@@ -12,6 +12,9 @@ import { CommentsListComponent } from './components/comments-list/comments-list.
 // reducers
 import { reducers } from './reducers/film-reducers';
 import {FormsModule} from '@angular/forms';
+import {EffectsModule} from '@ngrx/effects';
+import {FilmEffects} from './effects/film-effects';
+import {FilmService} from './services/film.service';
 
 @NgModule({
   declarations: [
@@ -23,9 +26,10 @@ import {FormsModule} from '@angular/forms';
   imports: [
     BrowserModule,
     StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([FilmEffects]),
     FormsModule
   ],
-  providers: [],
+  providers: [FilmService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
